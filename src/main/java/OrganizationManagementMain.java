@@ -111,7 +111,7 @@ public class OrganizationManagementMain {
         if (teams.containsKey(organizationId)) {
             Team team = teams.get(organizationId);
             team.addMember(employeeId);
-            employee.assignOrganization(employeeId);
+            employee.assignTeam(employeeId);
             System.out.println("직원 " + "'" + employee.getName() + "'" + "님이 팀 " + "'" + team.getName() + "'" + "에 성공적으로 배정되었습니다.");
         } else {
             System.out.println("해당 조직 ID가 존재하지 않습니다.");
