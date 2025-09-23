@@ -67,12 +67,12 @@ public class OrganizationService {
             for (Team team : organizationRepository.getTeams().values()) {
                 if (team.getParentDepartmentId() == department.getId()) {
                     System.out.println("  [팀]" + " " + team.getName() + " (ID = " + team.getId() + ")");
-                }
-                // 팀 구성원 (직원) 출력
-                for (int employeeId : team.getMembers()) {
-                    Employee employee = employeeRepository.getEmployees().get(employeeId);
-                    System.out.println("   - " + employee.getClass().getSimpleName()
-                            + " " + employee.getName() + " (ID = " + employeeId + ")");
+                    // 팀 구성원 (직원) 출력
+                    for (int employeeId : team.getMembers()) {
+                        Employee employee = employeeRepository.getEmployees().get(employeeId);
+                        System.out.println("   - " + employee.getClass().getSimpleName()
+                                + " " + employee.getName() + " (ID = " + employeeId + ")");
+                    }
                 }
             }
         }
