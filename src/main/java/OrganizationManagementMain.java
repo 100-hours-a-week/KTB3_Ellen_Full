@@ -21,6 +21,7 @@ public class OrganizationManagementMain {
     private static final OrganizationRepository organizationRepository = new OrganizationRepository();
     private static final EmployeeRepository employeeRepository = new EmployeeRepository();
 
+    private static final ClockTaskService clockTaskService = new ClockTaskService();
     private static final OrganizationService organizationService = new OrganizationService(organizationRepository, employeeRepository, idGenerator);
     private static final EmployeeService employeeService = new EmployeeService(organizationRepository, employeeRepository, idGenerator);
 
@@ -44,16 +45,13 @@ public class OrganizationManagementMain {
                 case "3" -> hireEmployee();
                 case "4" -> assignEmployee();
                 case "5" -> getOrganizationChart();
-                case "6" -> { System.out.println("프로그램을 종료합니다."); return; }
+                case "6" -> { System.out.println("프로그램을 종료합니다."); clockTaskService.shutDown(); return; }
                 default -> System.out.println("잘못된 입력입니다. 유효한 숫자 값을 입력해주세요.");
             }
         }
     }
 
-    private static void showTime() {
-        ClockTaskService clockTaskService = new ClockTaskService();
-        clockTaskService.startClockTask();
-    }
+    private static void showTime() { clockTaskService.startClockTask(); }
 
     private static void createDepartment() {
         organizationService.createDepartment(scanner);
