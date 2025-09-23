@@ -1,14 +1,17 @@
 import domain.enums.EntityType;
+import service.ClockTaskService;
 import shared.id.AtomicIdGenerator;
 import repository.EmployeeRepository;
 import shared.id.IdGenerator;
 import repository.OrganizationRepository;
 import service.EmployeeService;
 import service.OrganizationService;
+import thread.ClockTask;
 import ui.OrganizationManagementMenu;
 
 import java.util.EnumMap;
 import java.util.Scanner;
+
 
 public class OrganizationManagementMain {
 
@@ -23,10 +26,17 @@ public class OrganizationManagementMain {
 
     public static void main(String[] args) {
 
+        showTime();
+
         while (true) {
 
+            ClockTask.pauseAndClearLine();
             OrganizationManagementMenu.showMenu();
+
+            ClockTask.resume();
             String option = scanner.nextLine().trim();
+
+            ClockTask.pauseAndClearLine();
 
             switch (option) {
                 case "1" -> createDepartment();
@@ -35,9 +45,14 @@ public class OrganizationManagementMain {
                 case "4" -> assignEmployee();
                 case "5" -> getOrganizationChart();
                 case "6" -> { System.out.println("프로그램을 종료합니다."); return; }
-                default -> System.out.println("잘못된 입력입니다. 유효한 숫자 값을 입력해");
+                default -> System.out.println("잘못된 입력입니다. 유효한 숫자 값을 입력해주세요.");
             }
         }
+    }
+
+    private static void showTime() {
+        ClockTaskService clockTaskService = new ClockTaskService();
+        clockTaskService.startClockTask();
     }
 
     private static void createDepartment() {
